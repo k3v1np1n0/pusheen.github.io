@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>PUSHEEN S.A.S</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="img/logo.png">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+      
+      <a class="navbar-brand d-flex align-items-center" href="home.html">
+        <img src="img/logo.png" alt="Logo" width="40" height="40" class="me-2">
+        PUSHEEN S.A.S
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarNavDropdown">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto">
+
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+Sistema de producción
+</a>
+<ul class="dropdown-menu">
+<li><a class="dropdown-item" href="ERP.html"><strong>ERP</strong></a></li>
+<li><a class="dropdown-item" href="MES.html">MES</a></li>
+<li><a class="dropdown-item" href="CONTROL.html">CONTROL</a></li>
+</ul>
+</li>
+
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+Ropa
+</a>
+<ul class="dropdown-menu">
+<li><a class="dropdown-item" href="corta.html">Manga Corta</a></li>
+<li><a class="dropdown-item" href="larga.html">Manga larga</a></li>
+</ul>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="home.html">Inicio</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#contact">Ubicación</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="https://wa.me/573226952131">Ayuda</a>
+</li>
+
+<!-- ADMIN -->
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle fw-bold" role="button" data-bs-toggle="dropdown">
+👤 Admin
+</a>
+
+<ul class="dropdown-menu dropdown-menu-end shadow">
+
+<li class="dropdown-item-text">
+<strong>Administrador</strong><br>
+<small class="text-muted">Sistema PUSHEEN</small>
+</li>
+
+<li><hr class="dropdown-divider"></li>
+
+<li>
+<a class="dropdown-item text-danger" href="index.html">
+🔒 Cerrar sesión
+</a>
+</li>
+
+</ul>
+</li>
+
+</ul>
+      </div>
+  </div>
+</nav>
+
+<div class="container mt-5">
+
+<h2 class="mb-4">ERP - Gestión de Pedidos</h2>
+
+<div class="alert alert-info">
+Pedidos registrados: <strong id="totalPedidos">Cargando...</strong>
+</div>
+
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
+
+<thead class="table-dark">
+<tr>
+<th>Fecha</th>
+<th>Cliente</th>
+<th>NIT</th>
+<th>Franquicia</th>
+<th>Producto</th>
+<th>Talla</th>
+<th>Color</th>
+<th>Cantidad</th>
+</tr>
+</thead>
+
+<tbody id="tablaPedidos">
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<footer class="pt-4 mt-5">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-5 mb-3">
+        <h5 class="fw-bold">PUSHEEN S.A.S</h5>
+        <p class="small">
+          Moda que habla por ti. Encuentra tu estilo y vístete con actitud.
+        </p>
+      </div>
+
+      <div class="col-md-3 mb-3">
+        <h6 class="fw-bold">Enlaces</h6>
+        <ul class="list-unstyled">
+          <li><a href="home.html" class="text-decoration-none text-dark">Inicio</a></li>
+          <li><a href="https://maps.app.goo.gl/6RiF8LSvcGeQnKPUA" class="text-decoration-none text-dark">Tienda</a></li>
+          <li><a href="https://wa.me/573226952131" class="text-decoration-none text-dark">Ofertas</a></li>
+          <li><a href="https://wa.me/573226952131" class="text-decoration-none text-dark">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-4 mb-3" id="contact">
+        <h6 class="fw-bold">Contacto</h6>
+        <p class="small mb-1">📍 Cali, Colombia</p>
+        <p class="small mb-1">📧 contacto@PUSHEEN.com</p>
+        <p class="small">📱 +57 300 000 0000</p>
+      </div>
+
+    </div>
+
+    <hr>
+
+    <div class="text-center pb-3 small">
+      © 2026 PUSHEEN | Todos los derechos reservados
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTzoqm727DSfpCvAC2K8Im28oXNFYNtFVFBcYvzL3us81sNdBflV-hMaQ52bLKf0LUyWAQDRypcvQf2/pub?output=csv";
+
+fetch(url)
+.then(res => res.text())
+.then(data => {
+
+let filas = data.trim().split("\n");
+
+let tabla = document.getElementById("tablaPedidos");
+
+document.getElementById("totalPedidos").innerText = filas.length - 1;
+
+for(let i = 1; i < filas.length; i++){
+
+let columnas = filas[i].split(",");
+
+let fila = `
+<tr>
+<td>${columnas[1]}</td>
+<td>${columnas[2]}</td>
+<td>${columnas[3]}</td>
+<td>${columnas[4]}</td>
+<td>${columnas[5]}</td>
+<td>${columnas[6]}</td>
+<td>${columnas[8]}</td>
+<td>${columnas[7]}</td>
+</tr>
+`;
+
+tabla.innerHTML += fila;
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
