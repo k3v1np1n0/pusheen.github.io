@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PUSHEEN S.A.S</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="img/logo.png">
+  <style>
+
+.maquina{
+width:200px;
+height:120px;
+border:3px solid #333;
+margin:auto;
+position:relative;
+background:#ddd;
+border-radius:10px;
+}
+
+.aguja{
+width:6px;
+height:40px;
+background:black;
+position:absolute;
+left:50%;
+top:10px;
+transform:translateX(-50%);
+}
+
+.tela{
+width:150px;
+height:20px;
+background:#4CAF50;
+position:absolute;
+bottom:20px;
+left:25px;
+}
+
+.coser{
+animation:coser 0.25s infinite;
+}
+
+@keyframes coser{
+
+0%{top:10px;}
+
+50%{top:50px;}
+
+100%{top:10px;}
+
+}
+
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+      
+      <a class="navbar-brand d-flex align-items-center" href="home.html">
+        <img src="img/logo.png" alt="Logo" width="40" height="40" class="me-2">
+        PUSHEEN S.A.S
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarNavDropdown">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto">
+
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+Sistema de producción
+</a>
+<ul class="dropdown-menu">
+<li><a class="dropdown-item" href="ERP.html">ERP</a></li>
+<li><a class="dropdown-item" href="MES.html">MES</a></li>
+<li><a class="dropdown-item" href="CONTROL.html"><STRONG>CONTROL</STRONG></a></li>
+</ul>
+</li>
+
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+Ropa
+</a>
+<ul class="dropdown-menu">
+<li><a class="dropdown-item" href="corta.html">Manga Corta</a></li>
+<li><a class="dropdown-item" href="larga.html">Manga larga</a></li>
+</ul>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="home.html">Inicio</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#contact">Ubicación</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="https://wa.me/573226952131">Ayuda</a>
+</li>
+
+<!-- ADMIN -->
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle fw-bold" role="button" data-bs-toggle="dropdown">
+👤 Admin
+</a>
+
+<ul class="dropdown-menu dropdown-menu-end shadow">
+
+<li class="dropdown-item-text">
+<strong>Administrador</strong><br>
+<small class="text-muted">Sistema PUSHEEN</small>
+</li>
+
+<li><hr class="dropdown-divider"></li>
+
+<li>
+<a class="dropdown-item text-danger" href="index.html">
+🔒 Cerrar sesión
+</a>
+</li>
+
+</ul>
+</li>
+
+</ul>
+      </div>
+  </div>
+</nav>
+
+<div class="container mt-5">
+
+<h2 class="mb-4">CONTROL - Supervisión de Producción</h2>
+
+<div class="row text-center mb-4">
+
+<div class="col-md-3">
+<div class="card shadow">
+<div class="card-body">
+<h6>Pedidos pendientes</h6>
+<h3 id="pendientes">0</h3>
+</div>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card shadow">
+<div class="card-body">
+<h6>En producción</h6>
+<h3 id="produccion">0</h3>
+</div>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card shadow">
+<div class="card-body">
+<h6>Pedidos terminados</h6>
+<h3 id="terminados">0</h3>
+</div>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card shadow">
+<div class="card-body">
+<h6>Eficiencia</h6>
+<h3 id="eficiencia">0%</h3>
+</div>
+</div>
+</div>
+
+</div>
+
+<h4 class="mb-3">Estado del sistema</h4>
+
+<div class="alert alert-success text-center">
+Sistema funcionando correctamente
+</div>
+
+<h4 class="text-center mb-4">Producción en curso</h4>
+
+<div class="row g-3" id="produccionesActivas"></div>
+
+</div>
+
+  <div class="container mt-5">
+
+<h4 class="mb-3">Panel de control de producción</h4>
+
+<div class="card shadow p-4">
+
+<div class="row g-3">
+
+<div class="col-md-4">
+<input type="number" id="ordenInput" class="form-control" placeholder="Número de orden">
+</div>
+
+
+<div class="col-md-4">
+<button class="btn btn-success w-100" onclick="terminarProduccion()">Finalizar orden</button>
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+<div class="container mt-5">
+
+<h4 class="mb-3">Máquina de costura industrial</h4>
+
+<div class="card shadow p-4">
+
+<div class="text-center mb-3">
+
+<button class="btn btn-success" onclick="encenderMaquina()">Encender máquina</button>
+
+<button class="btn btn-danger" onclick="apagarMaquina()">Apagar máquina</button>
+
+</div>
+
+<div class="row text-center">
+
+<div class="col-md-3">
+<h6>Velocidad</h6>
+<h4 id="velocidad">0</h4>
+<small>puntadas/min</small>
+</div>
+
+<div class="col-md-3">
+<h6>Tensión hilo</h6>
+<h4 id="tension">0</h4>
+</div>
+
+<div class="col-md-3">
+<h6>Temperatura</h6>
+<h4 id="temperatura">0</h4>
+<small>°C</small>
+</div>
+
+<div class="col-md-3">
+<h6>Estado</h6>
+<h4 id="estadoMaquina">Apagada</h4>
+</div>
+
+</div>
+
+<div class="mt-4 text-center">
+
+<div class="maquina">
+
+<div id="aguja" class="aguja"></div>
+
+<div class="tela"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="container mt-5">
+
+<h4 class="mb-3">Monitoreo de máquina en tiempo real</h4>
+
+<div class="card shadow p-4">
+
+<canvas id="graficaMaquina" height="100"></canvas>
+
+</div>
+
+</div>
+
+<footer class="pt-4 mt-5">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-5 mb-3">
+        <h5 class="fw-bold">PUSHEEN S.A.S</h5>
+        <p class="small">
+          Moda que habla por ti. Encuentra tu estilo y vístete con actitud.
+        </p>
+      </div>
+
+      <div class="col-md-3 mb-3">
+        <h6 class="fw-bold">Enlaces</h6>
+        <ul class="list-unstyled">
+          <li><a href="home.html" class="text-decoration-none text-dark">Inicio</a></li>
+          <li><a href="https://maps.app.goo.gl/6RiF8LSvcGeQnKPUA" class="text-decoration-none text-dark">Tienda</a></li>
+          <li><a href="https://wa.me/573226952131" class="text-decoration-none text-dark">Ofertas</a></li>
+          <li><a href="https://wa.me/573226952131" class="text-decoration-none text-dark">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-4 mb-3" id="contact">
+        <h6 class="fw-bold">Contacto</h6>
+        <p class="small mb-1">📍 Cali, Colombia</p>
+        <p class="small mb-1">📧 contacto@PUSHEEN.com</p>
+        <p class="small">📱 +57 300 000 0000</p>
+      </div>
+
+    </div>
+
+    <hr>
+
+    <div class="text-center pb-3 small">
+      © 2026 PUSHEEN | Todos los derechos reservados
+    </div>
+  </div>
+</footer>
+
+  
+
+<script>
+
+let produccion = 0;
+let terminados = 0;
+let pendientes = 0;
+
+fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTzoqm727DSfpCvAC2K8Im28oXNFYNtFVFBcYvzL3us81sNdBflV-hMaQ52bLKf0LUyWAQDRypcvQf2/pub?output=csv")
+
+.then(response => response.text())
+
+.then(data => {
+
+let filas = data.split("\n");
+
+let totalPedidos = filas.length - 1; // quitar encabezado
+
+for(let i=1;i<=totalPedidos;i++){
+
+let estado = localStorage.getItem("orden_"+i);
+
+if(estado == 1){
+produccion++;
+}
+
+if(estado == 2){
+terminados++;
+}
+
+}
+
+pendientes = totalPedidos - produccion - terminados;
+
+document.getElementById("pendientes").innerText = pendientes;
+document.getElementById("produccion").innerText = produccion;
+document.getElementById("terminados").innerText = terminados;
+
+let eficiencia = 0;
+
+let total = pendientes + produccion + terminados;
+
+if(total > 0){
+
+eficiencia = Math.round((terminados / total) * 100);
+
+}
+
+document.getElementById("eficiencia").innerText = eficiencia + "%";
+
+});
+
+</script>
+
+<script>
+
+const TIEMPO_PRODUCCION = 60*10;
+
+function iniciarContadores(){
+
+let contenedor = document.getElementById("produccionesActivas");
+
+contenedor.innerHTML = "";
+
+for(let i=1;i<=100;i++){
+
+let estado = localStorage.getItem("orden_"+i);
+
+if(estado == 1){
+
+let inicio = localStorage.getItem("inicio_"+i);
+
+if(!inicio){
+
+inicio = Date.now();
+localStorage.setItem("inicio_"+i,inicio);
+
+}else{
+
+inicio = parseInt(inicio);
+
+}
+
+crearContador(i,inicio);
+
+}
+
+}
+
+}
+
+function crearContador(idOrden,inicio){
+
+let contenedor = document.getElementById("produccionesActivas");
+
+let div = document.createElement("div");
+
+div.className = "col-md-4 col-lg-3";
+
+div.innerHTML = `
+<div class="card shadow h-100">
+<div class="card-body text-center">
+
+<h6 class="text-muted">Orden #${idOrden}</h6>
+
+<h4 id="timer_${idOrden}" class="fw-bold">cargando...</h4>
+
+<div class="progress mt-3">
+
+<div id="barra_${idOrden}" 
+class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+style="width:100%"></div>
+
+</div>
+
+</div>
+</div>
+`;
+
+contenedor.appendChild(div);
+
+actualizarContador(idOrden,inicio);
+
+}
+
+function actualizarContador(idOrden,inicio){
+
+let alertaMostrada = false;
+
+let intervalo = setInterval(function(){
+
+let ahora = Date.now();
+
+let transcurrido = Math.floor((ahora - inicio)/1000);
+
+let tiempoOrden = localStorage.getItem("tiempo_"+idOrden);
+
+if(!tiempoOrden){
+tiempoOrden = 600;
+}
+
+let restante = tiempoOrden - transcurrido;
+
+if(restante <= 0){
+
+document.getElementById("timer_"+idOrden).innerText = "⚠ Retraso";
+
+let barra = document.getElementById("barra_"+idOrden);
+
+barra.classList.remove("bg-success");
+barra.classList.add("bg-danger");
+
+barra.style.width = "0%";
+
+if(!alertaMostrada){
+
+alert("⚠ La orden "+idOrden+" está tardando demasiado en producción");
+
+alertaMostrada = true;
+
+}
+
+clearInterval(intervalo);
+
+return;
+
+}
+
+let min = Math.floor(restante/60);
+
+let seg = restante % 60;
+
+document.getElementById("timer_"+idOrden).innerText =
+String(min).padStart(2,'0') + ":" + String(seg).padStart(2,'0');
+
+let porcentaje = (restante / tiempoOrden)*100;
+
+document.getElementById("barra_"+idOrden).style.width = porcentaje+"%";
+
+},1000);
+
+}
+
+setTimeout(iniciarContadores,1000);
+
+
+function iniciarProduccion(){
+
+if(intervalo) clearInterval(intervalo);
+
+intervalo = setInterval(function(){
+
+if(!pausado){
+
+tiempoRestante--;
+
+mostrarTiempo(tiempoRestante);
+
+if(tiempoRestante <= 0){
+
+clearInterval(intervalo);
+alert("Producción finalizada");
+
+}
+
+}
+
+},1000);
+
+}
+
+function terminarProduccion(){
+
+let id = document.getElementById("ordenInput").value;
+
+if(!id){
+alert("Ingrese número de orden");
+return;
+}
+
+localStorage.setItem("orden_"+id,2);
+
+alert("Orden "+id+" terminada");
+
+location.reload();
+
+}
+
+let operarios = 6;
+let tiempoPorPrenda = 5; // minutos
+
+let tiempoTotal = 0;
+let tiempoRestante = 0;
+let intervalo = null;
+let pausado = false;
+
+function calcularTiempo(){
+
+let cantidad = parseInt(document.getElementById("cantidad").value);
+
+if(!cantidad){
+alert("Ingrese cantidad de camisas");
+return;
+}
+
+let ciclos = Math.ceil(cantidad / operarios);
+
+tiempoTotal = ciclos * tiempoPorPrenda * 60;
+
+tiempoRestante = tiempoTotal;
+
+mostrarTiempo(tiempoRestante);
+
+}
+
+
+
+function pausarProduccion(){
+
+pausado = true;
+
+}
+
+function reanudarProduccion(){
+
+pausado = false;
+
+}
+
+function mostrarTiempo(segundos){
+
+let min = Math.floor(segundos / 60);
+
+let seg = segundos % 60;
+
+document.getElementById("tiempoEstimado").innerText =
+String(min).padStart(2,'0') + ":" + String(seg).padStart(2,'0');
+
+}
+
+let maquinaEncendida = false;
+
+let intervaloMaquina;
+
+function encenderMaquina(){
+
+if(maquinaEncendida) return;
+
+maquinaEncendida = true;
+
+document.getElementById("estadoMaquina").innerText = "Cosiendo";
+
+document.getElementById("aguja").classList.add("coser");
+
+intervaloMaquina = setInterval(actualizarVariables,2000);
+
+}
+
+function apagarMaquina(){
+
+maquinaEncendida = false;
+
+document.getElementById("estadoMaquina").innerText = "Apagada";
+
+document.getElementById("aguja").classList.remove("coser");
+
+clearInterval(intervaloMaquina);
+
+document.getElementById("velocidad").innerText = 0;
+document.getElementById("tension").innerText = 0;
+document.getElementById("temperatura").innerText = 0;
+
+}
+
+function actualizarVariables(){
+
+let velocidad = Math.floor(Math.random()*1500)+3000;
+
+let tension = (Math.random()*3+3).toFixed(1);
+
+let temperatura = Math.floor(Math.random()*15)+40;
+
+document.getElementById("velocidad").innerText = velocidad;
+
+document.getElementById("tension").innerText = tension;
+
+document.getElementById("temperatura").innerText = temperatura;
+
+let tiempo = new Date().toLocaleTimeString();
+
+grafica.data.labels.push(tiempo);
+
+grafica.data.datasets[0].data.push(temperatura);
+grafica.data.datasets[1].data.push(tension);
+
+if(grafica.data.labels.length > 15){
+
+grafica.data.labels.shift();
+grafica.data.datasets[0].data.shift();
+grafica.data.datasets[1].data.shift();
+
+}
+
+grafica.update();
+
+}
+
+let ctx = document.getElementById("graficaMaquina").getContext("2d");
+
+let grafica = new Chart(ctx, {
+type: "line",
+
+data: {
+
+labels: [],
+
+datasets: [
+
+{
+label: "Temperatura °C",
+data: [],
+borderWidth: 2,
+tension: 0.4
+},
+
+{
+label: "Tensión hilo",
+data: [],
+borderWidth: 2,
+tension: 0.4
+}
+
+]
+
+},
+
+options: {
+
+animation:false,
+
+scales:{
+
+y:{
+beginAtZero:false
+}
+
+}
+
+}
+
+});
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
