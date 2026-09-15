@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo - Control de Procesos</title>
+    <link rel="icon" type="image/png" href="img/pusheenimg.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e3d3f8 0%, #d0f0eb 50%, #fbe2ee 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+        .nav-link, .navbar-brand {
+            color: #6c5b7b !important;
+            font-weight: 600;
+        }
+        .nav-link:hover {
+            color: #b28dd4 !important;
+        }
+        .btn-pastel {
+            background-color: #b28dd4;
+            color: white;
+            border: none;
+        }
+        .btn-pastel:hover {
+            background-color: #9d73c7;
+            color: white;
+        }
+        footer {
+            background-color: #6c5b7b;
+            color: white;
+            margin-top: auto;
+        }
+        footer a {
+            color: #e3d3f8;
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg shadow-sm py-2">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="admin_home.html">
+                <img src="img/pusheenimg.png" alt="Logo" width="60" height="60" class="rounded-circle">
+                <span>PUSHEEN</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center gap-3">
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-1" href="admin_home.html">
+                            <i class="bi bi-house-door"></i> Inicio
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center gap-1" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-gear"></i> Opciones
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3">
+                            <li><a class="dropdown-item" href="configuracion.html">Parámetros de Planta</a></li>
+                            <li><a class="dropdown-item" href="reportes.html">Reportes de Sistema</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-1" href="admin_usuario.html">
+                            <i class="bi bi-person"></i> Usuario
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger d-flex align-items-center gap-1" href="login.html">
+                            <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5 flex-grow-1 d-flex align-items-center justify-content-center">
+        <div class="card p-5 shadow-lg border-0 rounded-5 bg-white text-center w-100" style="max-width: 750px;">
+            <img src="img/pusheenimg.png" alt="Módulo" width="100" class="mx-auto mb-3 rounded-circle">
+            
+            <h1 class="fw-bold mb-3" style="color: #6c5b7b;">MODULO ERP - ADMIN</h1>
+            <div class="p-4 rounded-4 bg-light border border-2 border-dashed mb-4">
+                <i class="bi bi-tools fs-2 mb-2 d-block" style="color: #b28dd4;"></i>
+                <p class="text-secondary mb-0">Espacio reservado para las tablas de datos, dashboards, controles interactivos o formularios específicos de esta vista.</p>
+            </div>
+
+            <div class="d-flex justify-content-center gap-3">
+                <a href="admin_home.html" class="btn btn-pastel rounded-4 px-4 py-2 fw-bold">
+                    <i class="bi bi-arrow-left me-1"></i> Volver al Panel Principal
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-4 text-center text-md-start">
+        <div class="container">
+            <div class="row gy-3">
+                <div class="col-12 col-md-4">
+                    <h5 class="fw-bold mb-2">PUSHEEN</h5>
+                    <p class="small mb-0 text-white-50">Suavidad en cada gota.</p>
+                </div>
+                <div class="col-12 col-md-4">
+                    <h5 class="fw-bold mb-2">Contacto</h5>
+                    <p class="small mb-1">Email: contacto@pusheen.com</p>
+                    <p class="small mb-0">Teléfono: +57 3147776124</p>
+                </div>
+                <div class="col-12 col-md-4">
+                    <h5 class="fw-bold mb-2">Redes Sociales</h5>
+                    <div class="d-flex gap-3 justify-content-center justify-content-md-start">
+                        <a href="#" class="small">Instagram</a>
+                        <a href="#" class="small">Facebook</a>
+                        <a href="#" class="small">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-3 opacity-25">
+            <div class="text-center small text-white-50">
+                &copy; 2026 PUSHEEN S.A.S Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

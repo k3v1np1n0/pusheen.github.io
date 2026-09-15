@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Control de Procesos (Operario)</title>
+    <link rel="icon" type="image/png" href="img/pusheenimg.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e3d3f8 0%, #d0f0eb 50%, #fbe2ee 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+        .nav-link, .navbar-brand {
+            color: #6c5b7b !important;
+            font-weight: 600;
+        }
+        .nav-link:hover {
+            color: #b28dd4 !important;
+        }
+        .btn-pastel {
+            background-color: #b28dd4;
+            color: white;
+            border: none;
+        }
+        .btn-pastel:hover {
+            background-color: #9d73c7;
+            color: white;
+        }
+        footer {
+            background-color: #6c5b7b;
+            color: white;
+            margin-top: auto;
+        }
+        footer a {
+            color: #e3d3f8;
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg shadow-sm py-2">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="operario_home.html">
+                <img src="img/pusheenimg.png" alt="Logo" width="60" height="60" class="rounded-circle">
+                <span>PUSHEEN</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center gap-3">
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-1" style="color: #b28dd4 !important;" href="operario_home.html">
+                            <i class="bi bi-house-door"></i> Inicio
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center gap-1" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-gear"></i> Opciones
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3">
+                            <li><a class="dropdown-item" href="configuracion.html">Parámetros de Planta</a></li>
+                            <li><a class="dropdown-item" href="reportes.html">Reportes de Sistema</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-1" href="operario_usuario.html">
+                            <i class="bi bi-person"></i> Usuario
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger d-flex align-items-center gap-1" href="../login.html">
+                            <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5 flex-grow-1 d-flex flex-column justify-content-center">
+        <div class="text-center mb-5">
+            <h1 class="fw-bold" style="color: #6c5b7b;">Panel de Control de Operaciones</h1>
+            <p class="text-muted">Selecciona el nivel de automatización que deseas gestionar</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            <div class="col-12 col-md-4">
+                <div class="card p-4 shadow-lg border-0 rounded-5 bg-white text-center h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="img/pusheenimg.png" alt="ERP" width="80" class="mb-3 rounded-circle">
+                        <h3 class="fw-bold mb-2" style="color: #6c5b7b;">ERP</h3>
+                        <p class="text-muted small">Nivel superior de gestión del negocio, finanzas y planificación estratégica de la empresa.</p>
+                    </div>
+                    <button type="button" class="btn btn-pastel w-100 py-2 rounded-4 fw-bold mt-3" data-bs-toggle="modal" data-bs-target="#modalAccesoRestringido">
+                        Gestionar ERP
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="card p-4 shadow-lg border-0 rounded-5 bg-white text-center h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="img/pusheenimg.png" alt="MES" width="80" class="mb-3 rounded-circle">
+                        <h3 class="fw-bold mb-2" style="color: #6c5b7b;">MES</h3>
+                        <p class="text-muted small">Nivel de ejecución de manufactura, trazabilidad de lotes y control de producción en planta.</p>
+                    </div>
+                    <a href="operario_mes.html" class="btn btn-pastel w-100 py-2 rounded-4 fw-bold mt-3">Gestionar MES</a>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="card p-4 shadow-lg border-0 rounded-5 bg-white text-center h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="img/pusheenimg.png" alt="SCADA/HMI" width="80" class="mb-3 rounded-circle">
+                        <h3 class="fw-bold mb-2" style="color: #6c5b7b;">SCADA / HMI</h3>
+                        <p class="text-muted small">Nivel de supervisión, monitorización en tiempo real y visualización gráfica del proceso.</p>
+                    </div>
+                    <a href="operario_scada.html" class="btn btn-pastel w-100 py-2 rounded-4 fw-bold mt-3">Ver SCADA</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de Acceso Restringido para ERP -->
+    <div class="modal fade" id="modalAccesoRestringido" tabindex="-1" aria-labelledby="modalAccesoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 rounded-5 shadow-lg p-3">
+                <div class="modal-header border-0 pb-0 justify-content-end">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center pt-0 px-4">
+                    <div class="mb-3">
+                        <i class="bi bi-shield-lock-fill display-3" style="color: #b28dd4;"></i>
+                    </div>
+                    <h4 class="fw-bold mb-2" style="color: #6c5b7b;" id="modalAccesoLabel">Acceso Restringido</h4>
+                    <p class="text-muted mb-4">
+                        Esta opción está reservada exclusivamente para el perfil de <strong>Administrador</strong>. Como operario, únicamente puedes interactuar con los módulos MES y SCADA/HMI.
+                    </p>
+                    <button type="button" class="btn btn-pastel px-4 py-2 rounded-4 fw-bold" data-bs-dismiss="modal">Entendido</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-4 text-center text-md-start">
+        <div class="container">
+            <div class="row gy-3">
+                <div class="col-12 col-md-4">
+                    <h5 class="fw-bold mb-2">PUSHEEN</h5>
+                    <p class="small mb-0 text-white-50">Suavidad en cada gota.</p>
+                </div>
+                <div class="col-12 col-md-4">
+                    <h5 class="fw-bold mb-2">Contacto</h5>
+                    <p class="small mb-1">Email: contacto@pusheen.com</p>
+                    <p class="small mb-0">Teléfono: +57 3147776124</p>
+                </div>
+                <div class="col-12 col-md-4">
+                    <h5 class="fw-bold mb-2">Redes Sociales</h5>
+                    <div class="d-flex gap-3 justify-content-center justify-content-md-start">
+                        <a href="#" class="small">Instagram</a>
+                        <a href="#" class="small">Facebook</a>
+                        <a href="#" class="small">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-3 opacity-25">
+            <div class="text-center small text-white-50">
+                &copy; 2026 PUSHEEN S.A.S Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
